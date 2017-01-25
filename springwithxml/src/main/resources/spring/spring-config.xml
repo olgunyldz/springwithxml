@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<!-- @ComponenScan annotation is same as below -->
+	<context:component-scan base-package="com.olgun.dependency"></context:component-scan>
+
+	<import resource="classpath:spring/app-config.xml" />
+	<bean id="goodMorningController"
+		class="com.olgun.dependency.injection.controller.GoodMorningController">
+		<property name="goodMorningService" ref="goodMorningService"></property>
+	</bean>
+
+	<bean id="goodNightController"
+		class="com.olgun.dependency.injection.controller.GoodNightController">
+		<property name="goodNightService" ref="goodNightService"></property>
+		<property name="goodNightServiceGermanImpl" ref="goodNightServiceGermanImpl"></property>
+		<property name="goodNightServiceTurkishImpl" ref="turkishGoodNight"></property>
+	</bean>
+	<bean id="goodAfternoonController"
+		class="com.olgun.dependency.injection.controller.GoodAfternoonController">
+		<property name="goodAfternoonService" ref="goodAfternoonService"></property>
+	</bean>
+
+</beans>

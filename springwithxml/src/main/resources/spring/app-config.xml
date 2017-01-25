@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+
+	<bean id="appFactory" class="com.olgun.dependency.injection.util.AppFactory"></bean>
+
+	<bean id="goodNightServiceTurkishImpl" name="turkishGoodNight"
+		factory-bean="appFactory" factory-method="createGoodNightService">
+		<constructor-arg value="tr"></constructor-arg>
+	</bean>
+
+	<bean id="goodNightServiceGermanImpl" factory-bean="appFactory"
+		factory-method="createGoodNightService">
+		<constructor-arg value="de"></constructor-arg>
+	</bean>
+
+
+	<beans profile="spanish">
+		<import resource="classpath:spring/app-config-spanish.xml"/>
+	</beans>
+
+	<beans profile="turkish">
+		<import resource="classpath:spring/app-config-turkish.xml" />
+	</beans>
+	<beans profile="default,english">
+		<import resource="classpath:spring/app-config-english.xml"/>
+	</beans>
+</beans>
